@@ -1,0 +1,103 @@
+PROGRAM SR_23G8_1_IO1
+VAR
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////		ЦШУ14		////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// WORD_LINK_1	Слово связи
+    Permission_REM    			: BOOL;		// Дистанционное управление. Разрешение	// 0 - нет сигнала, 1 - есть сигнал	R	input register	0x04
+    Connect_succesfull			: BOOL;		// Дистанционное управление				// 0 - нет сигнала, 1 - есть сигнал	R	input register	0x04
+    // СCU14_WORD_DI_STATE1	Слово входных переменных ЦШУ14 №1
+	DI_IO1_31KE7_OPENED  		: FB_DI;	// Кран шаровый с эл. Приводом 31kshe7 ОТКРЫТО	// 0 - нет сигнала, 1 - есть сигнал	R	input register	0x04
+    DI_IO1_31KE7_CLOSED 		: FB_DI;	// Кран шаровый с эл. Приводом 31kshe7 ЗАКРЫТО	// 0 - нет сигнала, 1 - есть сигнал	R	input register	0x04
+    DI_IO1_31KE8_OPENED  		: FB_DI;	// Кран шаровый с эл. Приводом 31kshe8 ОТКРЫТО	// 0 - нет сигнала, 1 - есть сигнал	R	input register	0x04
+    DI_IO1_31KE8_CLOSED 		: FB_DI;	// Кран шаровый с эл. Приводом 31kshe8 ЗАКРЫТО	// 0 - нет сигнала, 1 - есть сигнал	R	input register	0x04
+    DI_IO1_31KE9_OPENED  		: FB_DI;	// Кран шаровый с эл. Приводом 31kshe9 ОТКРЫТО	// 0 - нет сигнала, 1 - есть сигнал	R	input register	0x04
+    DI_IO1_31KE9_CLOSED 		: FB_DI;	// Кран шаровый с эл. Приводом 31kshe9 ЗАКРЫТО	// 0 - нет сигнала, 1 - есть сигнал	R	input register	0x04
+    DI_IO1_31KE10_OPENED 		: FB_DI;	// Кран шаровый с эл. Приводом 31kshe10 ОТКРЫТО	// 0 - нет сигнала, 1 - есть сигнал	R	input register	0x04
+    DI_IO1_31KE10_CLOSED		: FB_DI;	// Кран шаровый с эл. Приводом 31kshe10 ЗАКРЫТО	// 0 - нет сигнала, 1 - есть сигнал	R	input register	0x04
+    DI_ALM_STOP        			: FB_DI;	// Аварийный останов	// 0 - нет сигнала, 1 - есть сигнал	R	input register	0x04                   
+    DI_PHASE_CTRL      			: FB_DI;	// Контроль питания		// 0 - нет сигнала, 1 - есть сигнал	R	input register	0x04                      
+	// CCU14_WORD_ALARM1	Слово аварий ЦШУ14 №1
+    ALM_GL_STOP            		: FB_DI;	// Общая авария по ШУ (блокировка выбора режима)		// 0 - нет сигнала, 1 - есть сигнал	R	input register	0x04        
+    IO1_31Q2A_SENSOR_ALM   		: FB_DI;	// Датчик электропроводимости 31Q2A  - обрыв  DD1 AI1	// 0 - нет сигнала, 1 - есть сигнал	R	input register	0x04           
+    ALM_IO1_31Q2A_MIN      		: FB_DI;	// Минимально допустимое значение электропроводности датчик 31Q2A	// 0 - нет сигнала, 1 - есть сигнал	R	input register	0x04
+    ALM_IO1_31Q2A_MAX      		: FB_DI;	// Максимально допустимое значение электропроводности датчик 31Q2A	// 0 - нет сигнала, 1 - есть сигнал	R	input register	0x04
+    ALM_IO1_31KE7_Internal 		: FB_DI;	// Кран шаровый с эл. Приводом 31kshe7 превышение времени откр/закр	// 0 - нет сигнала, 1 - есть сигнал	R	input register	0x04
+    ALM_IO1_31KE8_Internal 		: FB_DI;	// Кран шаровый с эл. Приводом 31kshe8 превышение времени откр/закр	// 0 - нет сигнала, 1 - есть сигнал	R	input register	0x04
+    ALM_IO1_31KE9_Internal 		: FB_DI;	// Кран шаровый с эл. Приводом 31kshe9 превышение времени откр/закр	// 0 - нет сигнала, 1 - есть сигнал	R	input register	0x04
+    ALM_IO1_31KE10_Internal		: FB_DI;	// Кран шаровый с эл. Приводом 31kshe10 превышение времени откр/закр	// 0 - нет сигнала, 1 - есть сигнал	R	input register	0x04
+    ALM_CONNECT_DD2        		: FB_DI;	// Нет связи с модулем DD2 МK210-312	// 0 - нет сигнала, 1 - есть сигнал	R	input register	0x04
+                               
+    
+	CCU14_IND_MODE					: WORD;		// Режим работы ЦШУ14			// R	input register	0x04    
+                                     
+	PROC_SIGNAL_IO1_31Q2A        	: REAL;		// Величина изм. датчика 31Q2A	// R	input register	0x04                                
+    IO1_31Q2A_SET_MIN            	: REAL;		// Установленное значение min по изм. датчика 31Q2A // R	input register	0x04          
+    IO1_31Q2A_SET_MAX            	: REAL;		// Установленное значение max по изм. датчика 31Q2A	// R	input register	0x04           
+    IO1_31Q2A_SET_WORK           	: REAL;		// Установленное рабочее знач. (уставка) по изм. датчика 31Q2A	// R	input register	0x04
+    SET_AI_IO1_31Q2A_SET_Hi_limit	: REAL;		// Установленный верхний предел изм. датчика 31Q2A  // R	input register	0x04          
+    SET_AI_IO1_31Q2A_SET_Lo_limit	: REAL;		// Установленный нижний предел изм. датчика 31Q2A   // R	input register	0x04
+    IO1_31KE7_IND                	: WORD;		// Состояние - Арматура с электроприводом 31kshe7	// 0 - закр, 1 - откр, 2 - ожидание откр/закр, 3 - авария по времени отк/закр	R	input register	0x04       
+    IO1_31KE8_IND                	: WORD;		// Состояние - Арматура с электроприводом 31kshe8	// 0 - закр, 1 - откр, 2 - ожидание откр/закр, 3 - авария по времени отк/закр	R	input register	0x04            
+    IO1_31KE9_IND                	: WORD;		// Состояние - Арматура с электроприводом 31kshe9	// 0 - закр, 1 - откр, 2 - ожидание откр/закр, 3 - авария по времени отк/закр	R	input register	0x04             
+    IO1_31KE10_IND               	: WORD;		// Состояние - Арматура с электроприводом 31kshe10	// 0 - закр, 1 - откр, 2 - ожидание откр/закр, 3 - авария по времени отк/закр	R	input register	0x04
+    IO1_1_IND_MODE               	: WORD;		// Режим работы фильтра ИО1/1	// 0 - закр, 1 - откр, 2 - ожидание откр/закр, 3 - авария по времени отк/закр	R	input register	0x04                       
+    IO1_2_IND_MODE               	: WORD;		// Режим работы фильтра ИО1/2	// 0 - закр, 1 - откр, 2 - ожидание откр/закр, 3 - авария по времени отк/закр	R	input register	0x04
+	
+	IO1_FILT_TIME_REMAIN_H   		: WORD;		// Фильтр 1/1 - время до окончания фильтрации (Ч)	// 0 -24	// R	input register	0x04       
+    IO1_FILT_TIME_REMAIN_M   		: WORD;		// Фильтр 1/1 - время до окончания фильтрации (М)	// 0 -60	// R	input register	0x04  
+    IO1_FILT_TIME_REMAIN_S   		: WORD;		// Фильтр 1/1 - время до окончания фильтрации (С)	// 0 -60	// R	input register	0x04    
+	IO2_FILT_TIME_REMAIN_H   		: WORD;		// Фильтр 1/2 - время до окончания фильтрации (Ч)	// 0 -24	// R	input register	0x04        
+    IO2_FILT_TIME_REMAIN_M   		: WORD;		// Фильтр 1/2 - время до окончания фильтрации (М)	// 0 -60	// R	input register	0x04         
+    IO2_FILT_TIME_REMAIN_S   		: WORD;		// Фильтр 1/2 - время до окончания фильтрации (С)	// 0 -60	// R	input register	0x04        
+	IO1_RINSE_TIME_REMAIN_M  		: WORD;		// Фильтр 1/1 - время до окончания промывки (М)		// 0 -60	// R	input register	0x04           
+    IO1_RINSE_TIME_REMAIN_S  		: WORD;		// Фильтр 1/1 - время до окончания промывки (С)		// 0 -60	// R	input register	0x04          
+    IO2_RINSE_TIME_REMAIN_M  		: WORD;		// Фильтр 1/2 - время до окончания промывки (М)		// 0 -60	// R	input register	0x04          
+    IO2_RINSE_TIME_REMAIN_S  		: WORD;		// Фильтр 1/2 - время до окончания промывки (С)   	// 0 -60	// R	input register	0x04       
+	IO1_RELAX_TIME_REMAIN_M  		: WORD;		// Фильтр 1/1 - время до окончания успокоения (М) 	// 0 -60	// R	input register	0x04       
+    IO1_RELAX_TIME_REMAIN_S  		: WORD;		// Фильтр 1/1 - время до окончания успокоения (С)  	// 0 -60	// R	input register	0x04      
+    IO2_RELAX_TIME_REMAIN_M  		: WORD;		// Фильтр 1/2 - время до окончания успокоения (М)  	// 0 -60	// R	input register	0x04     
+    IO2_RELAX_TIME_REMAIN_S  		: WORD;		// Фильтр 1/2 - время до окончания успокоения (С)	// 0 -60	// R	input register	0x04       
+    IO1_REGEN_TIME_REMAIN_M  		: WORD;		// Фильтр 1/1 - время до окончания регенерации (М	// 0 -60	// R	input register	0x04      
+    IO1_REGEN_TIME_REMAIN_S  		: WORD;		// Фильтр 1/1 - время до окончания регенерации (С)	// 0 -60	// R	input register	0x04      
+    IO2_REGEN_TIME_REMAIN_M  		: WORD;		// Фильтр 1/2 - время до окончания регенерации (М)	// 0 -60	// R	input register	0x04      
+    IO2_REGEN_TIME_REMAIN_S  		: WORD;		// Фильтр 1/2 - время до окончания регенерации (С)	// 0 -60	// R	input register	0x04    
+    IO1_REGEN_INTERVAL_REMAIN		: DWORD;	// Фильтр 1/1 - время до начала регенерации (д чч:мм:сс)	// 0 -30235959	// R	input register	0x04
+    IO2_REGEN_INTERVAL_REMAIN		: DWORD;	// Фильтр 1/2 - время до начала регенерации (д чч:мм:сс)	// 0 -30235959	// R	input register	0x04
+
+	// ЦШУ14_WORD_CMND2		Слово команд №2
+    REM_IO1_31KE7_OPEN 	: BOOL;	// Арматура с электроприводом 31kshe7 - открыть	// 0 - нет сигнала, 1 - есть сигнал	// RW	Holding register	0x06  
+    REM_IO1_31KE8_OPEN 	: BOOL;	// Арматура с электроприводом 31kshe8 - открыть	// 0 - нет сигнала, 1 - есть сигнал	// RW	Holding register	0x06  
+    REM_IO1_31KE9_OPEN 	: BOOL;	// Арматура с электроприводом 31kshe9 - открыть	// 0 - нет сигнала, 1 - есть сигнал	// RW	Holding register	0x06  
+    REM_IO1_31KE10_OPEN	: BOOL;	// Арматура с электроприводом 31kshe10 - открыть	// 0 - нет сигнала, 1 - есть сигнал	// RW	Holding register	0x06  
+	//ЦШУ14_WORD_CMND1		Слово команд №1
+    Rem_Reset_ALM		: BOOL;	// Внешний сигнал квитирования аварий           		// 0 - нет сигнала, 1 - есть сигнал	// RW	Holding register	0x06     
+    Rem_Stop     		: BOOL;	// Внешний сигнал останова (аналогично Авар. ост.)		// 0 - нет сигнала, 1 - есть сигнал	// RW	Holding register	0x06   
+    Set_rem_mode 		: BOOL;	// Внешний сигнал. Установить дистанционное подключение	// 0 - нет сигнала, 1 - есть сигнал	// RW	Holding register	0x06
+
+	
+	/////////////////////////////////////////////////////////////////////
+	// ВСПОМОГАТЕЛЬНЫЕ ПЕРЕМЕННЫЕ
+	
+   // Входные сигналы Modbus
+    arwMB_0x04		: ARRAY[0..42] OF WORD;  // Чтение входных регистров  (Input register   адреса 0x04)
+    arwMB_0x06		: ARRAY[0..1] OF WORD;   // Запись регистров хранения (Holding register адреса 0x06)
+	
+	quality 		: eQuality;		// Качество связи
+    quality_in 		: BOOL;			// Флаг качества связи	
+    QT_31Q2A 		: FB_AI;		// Датчик электропроводимости 31Q2A
+    
+    V_31kshe7		: FB_VALVE;		// Кран 31kshe7
+    V_31kshe8		: FB_VALVE;		// Кран 31kshe8
+    V_31kshe9		: FB_VALVE;		// Кран 31kshe9
+    V_31kshe10		: FB_VALVE;		// Кран 31kshe10
+	
+    // Массивы для преобразования REAL
+    PROC_SIGNAL_QT_31Q2A_in	: ARRAY[0..1] OF WORD;
+    QT_31Q2A_Set_Min_in    	: ARRAY[0..1] OF WORD;
+    QT_31Q2A_Set_Max_in    	: ARRAY[0..1] OF WORD;
+    QT_31Q2A_Set_Work_in   	: ARRAY[0..1] OF WORD;
+    QT_31Q2A_Hi_limit_in	: ARRAY[0..1] OF WORD;
+    QT_31Q2A_Lo_limit_in	: ARRAY[0..1] OF WORD; 
+	
+END_VAR
