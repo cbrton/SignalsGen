@@ -13,7 +13,7 @@ def signals_matches(path: str, equipment_type: str, signal_type: str) -> tuple:
             object_name_list = re.search(r'\d{1,2}[a-z][a-z][a-z][a-z]?\d{1,3}(_\d)?', declaration)     # Поиск названия клапана с помощью регулярки ()
             object_name: str = ''
             var_name: str = ''
-            signal: str = ''
+            signal_desc: str = ''
             if object_name_list:
                 object_name = object_name_list[0]
                 splitted_declaration = declaration.split(sep=':')
@@ -48,7 +48,7 @@ def signals_matches(path: str, equipment_type: str, signal_type: str) -> tuple:
             object_name_list = re.search(r'N[A-Z]?\d{1,2}(_\d)?', declaration)
             object_name: str = ''
             var_name: str = ''
-            signal: str = ''
+            signal_desc: str = ''
             if object_name_list:
                 object_name = object_name_list[0]
                 splitted_declaration = declaration.split(sep=':')
