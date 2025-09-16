@@ -127,26 +127,6 @@ def write_str_to_file(data: str, path: str) -> None:
         for i in data:
             f.write(i)
 
-def write_str_to_csv(data: str, path: str):
-    with open(path, "w+", encoding="UTF-8") as f:
-        writer = csv.writer(f)
-        writer.writerow(['id', 'system', 'equipment', 'name', 'place', 'product', 'module', 'channel', 'crate', 'check', 'cat', 'property', 'fb', 'inversion', 'ton', 'tof', 'comment', 'modbus', 'node'])
-        rows = data.split(sep='\n')
-        for row in rows:
-            splitted_row = row.split(sep='\t')
-            if splitted_row[0]:
-                print(splitted_row)
-                id = splitted_row[0]
-                splitted_id = id.split(sep='_')
-                equipment:str = ''
-                equipment = splitted_id[1] + '/' + splitted_id[2]
-                name:str = ''
-                name = splitted_id[1] + '/' + splitted_id[2] + ' ' + splitted_id[3]
-                comment = splitted_row[1]
-                writer.writerow(
-                   [id, 'RSU_12', equipment, name, '', '', '', '', '', '', '',
-                     '', '', '', '', '', comment, '', ''])
-
 def write_signal_to_excel(data: str, path: str, equipment_type: str, signal_type: str):
     if signal_type == 'di':
         ids: list = []
@@ -236,17 +216,13 @@ def write_signal_to_excel(data: str, path: str, equipment_type: str, signal_type
         df.to_excel(path)
 
 signals_valve_di = signals_matches_valve_di('Files/var_declarations')
-#write_str_to_file(signals_valve_di[0], 'Files/valve_di_' + signals_valve_di[1])
 write_signal_to_excel(signals_valve_di[0], 'Files/valve_di_' + signals_valve_di[1] + '.xlsx', 'valve', 'di')
 
 signals_valve_do = signals_matches_valve_do('Files/var_declarations')
-#write_str_to_file(signals_valve_do[0], 'Files/valve_do_' + signals_valve_do[1])
 write_signal_to_excel(signals_valve_do[0], 'Files/valve_do_' + signals_valve_do[1] + '.xlsx', 'valve', 'do')
 
 signals_mtr_di = signals_matches_mtr_di('Files/var_declarations')
-#write_str_to_file(signals_mtr_di[0], 'Files/mtr_di_' + signals_mtr_di[1])
 write_signal_to_excel(signals_mtr_di[0], 'Files/mtr_di_' + signals_mtr_di[1] + '.xlsx', 'mtr', 'di')
 
 signals_mtr_do = signals_matches_mtr_do('Files/var_declarations')
-#write_str_to_file(signals_mtr_do[0], 'Files/mtr_do_' + signals_mtr_do[1])
 write_signal_to_excel(signals_mtr_do[0], 'Files/mtr_do_' + signals_mtr_do[1] + '.xlsx', 'mtr', 'do')
