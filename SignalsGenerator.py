@@ -19,28 +19,28 @@ def signals_matches(path: str, equipment_type: str, signal_type: str) -> tuple:
                 splitted_declaration = declaration.split(sep=':')
                 var_name = re.sub(r'\s', '', splitted_declaration[0])
                 splitted_var_name = var_name.split(sep='_')
-                signal = splitted_var_name[len(splitted_var_name) - 1]
+                signal_desc = splitted_var_name[len(splitted_var_name) - 1]
 
             if signal_type == 'di':
                 if object_name != '':
-                    if signal == 'OPENED':
+                    if signal_desc == 'OPENED':
                         valve_opened_signal = 'V_' + object_name + '_opened' + '\t' + sr + '.' + var_name + '\n'
                         result += valve_opened_signal
 
-                    if signal == 'CLOSED':
+                    if signal_desc == 'CLOSED':
                         valve_closed_signal = 'V_' + object_name + '_closed' + '\t' + sr + '.' + var_name + '\n'
                         result += valve_closed_signal
 
-                    if signal == 'Internal':
+                    if signal_desc == 'Internal':
                         valve_fault_signal = 'V_' + object_name + '_fault' + '\t' + sr + '.' + var_name + '\n'
                         result += valve_fault_signal
             elif signal_type == 'do':
                 if object_name != '':
-                    if signal == 'OPEN':
+                    if signal_desc == 'OPEN':
                         valve_opened_signal = 'V_' + object_name + '_open' + '\t' + sr + '.' + var_name + '\n'
                         result += valve_opened_signal
 
-                    if signal == 'CLOSE':
+                    if signal_desc == 'CLOSE':
                         valve_closed_signal = 'V_' + object_name + '_close' + '\t' + sr + '.' + var_name + '\n'
                         result += valve_closed_signal
     elif equipment_type == 'mtr':
@@ -54,24 +54,24 @@ def signals_matches(path: str, equipment_type: str, signal_type: str) -> tuple:
                 splitted_declaration = declaration.split(sep=':')
                 var_name = re.sub(r'\s', '', splitted_declaration[0])
                 splitted_var_name = var_name.split(sep='_')
-                signal = splitted_var_name[len(splitted_var_name) - 1]
+                signal_desc = splitted_var_name[len(splitted_var_name) - 1]
 
             if signal_type == 'di':
                 if object_name != '':
-                    if signal == 'WORK':
+                    if signal_desc == 'WORK':
                         pump_work_signal = object_name + '_pump_work' + '\t' + sr + '.' + var_name + '\n'
                         result += pump_work_signal
 
-                    if signal == 'FAULT':
+                    if signal_desc == 'FAULT':
                         pump_fault_signal = object_name + '_pump_fault' + '\t' + sr + '.' + var_name + '\n'
                         result += pump_fault_signal
 
-                    if signal == 'WAITING':
+                    if signal_desc == 'WAITING':
                         pump_waiting_signal = object_name + '_pump_waiting' + '\t' + sr + '.' + var_name + '\n'
                         result += pump_waiting_signal
             elif signal_type == 'do':
                 if object_name != '':
-                    if signal == 'OFF':
+                    if signal_desc == 'OFF':
                         pump_setStart_signal = object_name + '_pump_setStart' + '\t' + sr + '.' + var_name + '\n'
                         result += pump_setStart_signal
     return (result, sr)
