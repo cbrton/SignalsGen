@@ -147,100 +147,106 @@ def write_str_to_csv(data: str, path: str):
                    [id, 'RSU_12', equipment, name, '', '', '', '', '', '', '',
                      '', '', '', '', '', comment, '', ''])
 
-def write_di_to_excel(data: str, path: str, type: str):
-    ids:list = []
-    systems:list = []
-    equipments:list = []
-    names: list = []
-    fbs: list = []
-    comments:list = []
-    rows = data.split(sep='\n')
+def write_signal_to_excel(data: str, path: str, equipment_type: str, signal_type: str):
+    if signal_type == 'di':
+        ids: list = []
+        systems: list = []
+        equipments: list = []
+        names: list = []
+        fbs: list = []
+        comments: list = []
+        rows = data.split(sep='\n')
 
-    for row in rows:
-        splitted_row = row.split(sep='\t')
-        if splitted_row[0]:
-            id = splitted_row[0]
-            ids.append(id)
-            systems.append('RSU_12')
-            fbs.append('FB_DI')
-            splitted_id = id.split(sep='_')
-            equipment: str = ''
-            if type == 'valve':
-                if len(splitted_id) == 4:
-                    equipment = splitted_id[1] + '/' + splitted_id[2]
-                else:
-                    equipment = splitted_id[1]
-            elif type == 'mtr':
-                equipment = splitted_id[0] + '/' +splitted_id[1]
-            equipments.append(equipment)
-            name: str = ''
-            if type == 'valve':
-                if len(splitted_id) == 4:
-                    name = splitted_id[1] + '/' + splitted_id[2] + ' ' + splitted_id[3]
-                else:
-                    name = splitted_id[1] + ' ' + splitted_id[2]
-            elif type == 'mtr':
-                name = splitted_id[0] + '/' + splitted_id[1] + ' ' + splitted_id[2] + ' ' + splitted_id[3]
-            names.append(name)
-            comment = splitted_row[1]
-            comments.append(comment)
+        for row in rows:
+            splitted_row = row.split(sep='\t')
+            if splitted_row[0]:
+                id = splitted_row[0]
+                ids.append(id)
+                systems.append('RSU_12')
+                fbs.append('FB_DI')
+                splitted_id = id.split(sep='_')
+                equipment: str = ''
+                if equipment_type == 'valve':
+                    if len(splitted_id) == 4:
+                        equipment = splitted_id[1] + '/' + splitted_id[2]
+                    else:
+                        equipment = splitted_id[1]
+                elif equipment_type == 'mtr':
+                    equipment = splitted_id[0] + '/' + splitted_id[1]
+                equipments.append(equipment)
+                name: str = ''
+                if equipment_type == 'valve':
+                    if len(splitted_id) == 4:
+                        name = splitted_id[1] + '/' + splitted_id[2] + ' ' + splitted_id[3]
+                    else:
+                        name = splitted_id[1] + ' ' + splitted_id[2]
+                elif equipment_type == 'mtr':
+                    name = splitted_id[0] + '/' + splitted_id[1] + ' ' + splitted_id[2] + ' ' + splitted_id[3]
+                names.append(name)
+                comment = splitted_row[1]
+                comments.append(comment)
 
-    df = pd.DataFrame({'id' : ids, 'system' : systems, 'equipment' : equipments, 'name' : names, 'place' : '', 'product' : '', 'module' : '', 'channel' : '', 'crate' : '', 'check' : '', 'cat' : '', 'property' : '', 'fb' : fbs, 'inversion' : '', 'ton' : '', 'tof' : '', 'comment' : comments, 'modbus' : '', 'node' : ''})
-    df.to_excel(path)
+        df = pd.DataFrame(
+            {'id': ids, 'system': systems, 'equipment': equipments, 'name': names, 'place': '', 'product': '',
+             'module': '', 'channel': '', 'crate': '', 'check': '', 'cat': '', 'property': '', 'fb': fbs,
+             'inversion': '', 'ton': '', 'tof': '', 'comment': comments, 'modbus': '', 'node': ''})
+        df.to_excel(path)
+    elif signal_type == 'do':
+        ids: list = []
+        systems: list = []
+        equipments: list = []
+        names: list = []
+        fbs: list = []
+        comments: list = []
+        rows = data.split(sep='\n')
 
-def write_do_to_excel(data: str, path: str, type: str):
-    ids:list = []
-    systems:list = []
-    equipments:list = []
-    names: list = []
-    fbs: list = []
-    comments:list = []
-    rows = data.split(sep='\n')
+        for row in rows:
+            splitted_row = row.split(sep='\t')
+            if splitted_row[0]:
+                id = splitted_row[0]
+                ids.append(id)
+                systems.append('RSU_12')
+                fbs.append('FB_DO')
+                splitted_id = id.split(sep='_')
+                equipment: str = ''
+                if equipment_type == 'valve':
+                    if len(splitted_id) == 4:
+                        equipment = splitted_id[1] + '/' + splitted_id[2]
+                    else:
+                        equipment = splitted_id[1]
+                elif equipment_type == 'mtr':
+                    equipment = splitted_id[0] + '/' + splitted_id[1]
+                equipments.append(equipment)
+                name: str = ''
+                if equipment_type == 'valve':
+                    if len(splitted_id) == 4:
+                        name = splitted_id[1] + '/' + splitted_id[2] + ' ' + splitted_id[3]
+                    else:
+                        name = splitted_id[1] + ' ' + splitted_id[2]
+                elif equipment_type == 'mtr':
+                    name = splitted_id[0] + '/' + splitted_id[1] + ' ' + splitted_id[2] + ' ' + splitted_id[3]
+                names.append(name)
+                comment = splitted_row[1]
+                comments.append(comment)
 
-    for row in rows:
-        splitted_row = row.split(sep='\t')
-        if splitted_row[0]:
-            id = splitted_row[0]
-            ids.append(id)
-            systems.append('RSU_12')
-            fbs.append('FB_DO')
-            splitted_id = id.split(sep='_')
-            equipment: str = ''
-            if type == 'valve':
-                if len(splitted_id) == 4:
-                    equipment = splitted_id[1] + '/' + splitted_id[2]
-                else:
-                    equipment = splitted_id[1]
-            elif type == 'mtr':
-                equipment = splitted_id[0] + '/' + splitted_id[1]
-            equipments.append(equipment)
-            name: str = ''
-            if type == 'valve':
-                if len(splitted_id) == 4:
-                    name = splitted_id[1] + '/' + splitted_id[2] + ' ' + splitted_id[3]
-                else:
-                    name = splitted_id[1] + ' ' + splitted_id[2]
-            elif type == 'mtr':
-                name = splitted_id[0] + '/' + splitted_id[1] + ' ' + splitted_id[2] + ' ' + splitted_id[3]
-            names.append(name)
-            comment = splitted_row[1]
-            comments.append(comment)
-
-    df = pd.DataFrame({'id' : ids, 'equipment' : equipments, 'system' : systems, 'name' : names, 'place' : '', 'product' : '', 'module' : '', 'channel' : '', 'crate' : '', 'check' : '', 'inversion' : '', 'property' : '', 'fb' : fbs, 'comment' : comments, 'modbus' : '', 'node' : ''})
-    df.to_excel(path)
+        df = pd.DataFrame(
+            {'id': ids, 'equipment': equipments, 'system': systems, 'name': names, 'place': '', 'product': '',
+             'module': '', 'channel': '', 'crate': '', 'check': '', 'inversion': '', 'property': '', 'fb': fbs,
+             'comment': comments, 'modbus': '', 'node': ''})
+        df.to_excel(path)
 
 signals_valve_di = signals_matches_valve_di('Files/var_declarations')
 #write_str_to_file(signals_valve_di[0], 'Files/valve_di_' + signals_valve_di[1])
-write_di_to_excel(signals_valve_di[0], 'Files/valve_di_' + signals_valve_di[1] + '.xlsx', 'valve')
+write_signal_to_excel(signals_valve_di[0], 'Files/valve_di_' + signals_valve_di[1] + '.xlsx', 'valve', 'di')
 
 signals_valve_do = signals_matches_valve_do('Files/var_declarations')
 #write_str_to_file(signals_valve_do[0], 'Files/valve_do_' + signals_valve_do[1])
-write_do_to_excel(signals_valve_do[0], 'Files/valve_do_' + signals_valve_do[1] + '.xlsx', 'valve')
+write_signal_to_excel(signals_valve_do[0], 'Files/valve_do_' + signals_valve_do[1] + '.xlsx', 'valve', 'do')
 
 signals_mtr_di = signals_matches_mtr_di('Files/var_declarations')
 #write_str_to_file(signals_mtr_di[0], 'Files/mtr_di_' + signals_mtr_di[1])
-write_di_to_excel(signals_mtr_di[0], 'Files/mtr_di_' + signals_mtr_di[1] + '.xlsx', 'mtr')
+write_signal_to_excel(signals_mtr_di[0], 'Files/mtr_di_' + signals_mtr_di[1] + '.xlsx', 'mtr', 'di')
 
 signals_mtr_do = signals_matches_mtr_do('Files/var_declarations')
 #write_str_to_file(signals_mtr_do[0], 'Files/mtr_do_' + signals_mtr_do[1])
-write_do_to_excel(signals_mtr_do[0], 'Files/mtr_do_' + signals_mtr_do[1] + '.xlsx', 'mtr')
+write_signal_to_excel(signals_mtr_do[0], 'Files/mtr_do_' + signals_mtr_do[1] + '.xlsx', 'mtr', 'do')
