@@ -223,49 +223,49 @@ VAR
     ////////////////////////////////////////////        ШУ5     ////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
     //  LCU5_WORD_DI_STATE1 - Слово входных переменных ШУ4 №1
-    LCU5_DI_FN_KE1_1_OPENED : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe1_1 ОТКР    BOOL    49-BIT 0    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_DI_FN_KE1_1_CLOSED : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe1_1 ЗАКР    BOOL    49-BIT 1    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_DI_FN_KE1_2_OPENED : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe1_2 ОТКР    BOOL    49-BIT 2    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_DI_FN_KE1_2_CLOSED : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe1_2 ЗАКР    BOOL    49-BIT 3    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_DI_FN_KE1_3_OPENED : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe1_3 ОТКР    BOOL    49-BIT 4    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_DI_FN_KE1_3_CLOSED : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe1_3 ЗАКР    BOOL    49-BIT 5    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_DI_FN_KE2_1_OPENED : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe2_1 ОТКР    BOOL    49-BIT 6    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_DI_FN_KE2_1_CLOSED : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe2_1 ЗАКР    BOOL    49-BIT 7    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_DI_FN_KE2_2_OPENED : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe2_2 ОТКР    BOOL    49-BIT 8    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_DI_FN_KE2_2_CLOSED : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe2_2 ЗАКР    BOOL    49-BIT 9    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_DI_FN_KE2_3_OPENED : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe2_3 ОТКР    BOOL    49-BIT 10   "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_DI_FN_KE2_3_CLOSED : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe2_3 ЗАКР    BOOL    49-BIT 11   "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_DI_FN_KE3_1_OPENED : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe3_1 ОТКР    BOOL    49-BIT 12   "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_DI_FN_KE3_1_CLOSED : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe3_1 ЗАКР    BOOL    49-BIT 13   "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_DI_FN_KE3_2_OPENED : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe3_2 ОТКР    BOOL    49-BIT 14   "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_DI_FN_KE3_2_CLOSED : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe3_2 ЗАКР    BOOL    49-BIT 15   "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_DI_FN_KE1_1_OPENED : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe1_1 ОТКР    BOOL    49-BIT 0    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_DI_FN_KE1_1_CLOSED : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe1_1 ЗАКР    BOOL    49-BIT 1    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_DI_FN_KE1_2_OPENED : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe1_2 ОТКР    BOOL    49-BIT 2    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_DI_FN_KE1_2_CLOSED : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe1_2 ЗАКР    BOOL    49-BIT 3    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_DI_FN_KE1_3_OPENED : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe1_3 ОТКР    BOOL    49-BIT 4    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_DI_FN_KE1_3_CLOSED : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe1_3 ЗАКР    BOOL    49-BIT 5    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_DI_FN_KE2_1_OPENED : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe2_1 ОТКР    BOOL    49-BIT 6    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_DI_FN_KE2_1_CLOSED : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe2_1 ЗАКР    BOOL    49-BIT 7    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_DI_FN_KE2_2_OPENED : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe2_2 ОТКР    BOOL    49-BIT 8    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_DI_FN_KE2_2_CLOSED : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe2_2 ЗАКР    BOOL    49-BIT 9    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_DI_FN_KE2_3_OPENED : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe2_3 ОТКР    BOOL    49-BIT 10   "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_DI_FN_KE2_3_CLOSED : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe2_3 ЗАКР    BOOL    49-BIT 11   "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_DI_FN_KE3_1_OPENED : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe3_1 ОТКР    BOOL    49-BIT 12   "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_DI_FN_KE3_1_CLOSED : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe3_1 ЗАКР    BOOL    49-BIT 13   "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_DI_FN_KE3_2_OPENED : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe3_2 ОТКР    BOOL    49-BIT 14   "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_DI_FN_KE3_2_CLOSED : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe3_2 ЗАКР    BOOL    49-BIT 15   "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
     
     //  LCU5_WORD_DI_STATE2 - Слово входных переменных ШУ4 №2
-    LCU5_DI_FN_KE3_3_OPENED     : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe3_3 ОТКР    BOOL    50-BIT 0    "0 - отключено, 1 - включено"   R   input register  0x04
-    LCU5_DI_FN_KE3_3_CLOSED     : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe3_3 ЗАКР    BOOL    50-BIT 1    "0 - отключено, 1 - включено"   R   input register  0x04
-    LCU5_DI_FN_KE4_3_OPENED     : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe4_3 ОТКР    BOOL    50-BIT 2    "0 - отключено, 1 - включено"   R   input register  0x04
-    LCU5_DI_FN_KE4_3_CLOSED     : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe4_3 ЗАКР    BOOL    50-BIT 3    "0 - отключено, 1 - включено"   R   input register  0x04
-    LCU5_DI_FN_KE5_3_OPENED     : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe5_3 ОТКР    BOOL    50-BIT 4    "0 - отключено, 1 - включено"   R   input register  0x04
-    LCU5_DI_FN_KE5_3_CLOSED     : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe5_3 ЗАКР    BOOL    50-BIT 5    "0 - отключено, 1 - включено"   R   input register  0x04
+    LCU5_DI_FN_KE3_3_OPENED     : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe3_3 ОТКР    BOOL    50-BIT 0    "0 - отключено, 1 - включено"   R   input register  0x04
+    LCU5_DI_FN_KE3_3_CLOSED     : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe3_3 ЗАКР    BOOL    50-BIT 1    "0 - отключено, 1 - включено"   R   input register  0x04
+    LCU5_DI_FN_KE4_3_OPENED     : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe4_3 ОТКР    BOOL    50-BIT 2    "0 - отключено, 1 - включено"   R   input register  0x04
+    LCU5_DI_FN_KE4_3_CLOSED     : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe4_3 ЗАКР    BOOL    50-BIT 3    "0 - отключено, 1 - включено"   R   input register  0x04
+    LCU5_DI_FN_KE5_3_OPENED     : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe5_3 ОТКР    BOOL    50-BIT 4    "0 - отключено, 1 - включено"   R   input register  0x04
+    LCU5_DI_FN_KE5_3_CLOSED     : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe5_3 ЗАКР    BOOL    50-BIT 5    "0 - отключено, 1 - включено"   R   input register  0x04
     LCU5_DI_ALM_STOP            : FB_DI;    //  Аварийный стоп      BOOL    50-BIT 6    "0 - отключено, 1 - включено"   R   input register  0x04
     LCU5_PROC_SIGNAL_FN_4P10    : FB_DI;    //  Реле давления 4P10  BOOL    50-BIT 7    "0 - отключено, 1 - включено"   R   input register  0x04
     
     //  LCU5_WORD_ALARM - Слово аварий ШУ4
-    LCU5_ALM_FN_KE1_1_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe1_1 превышение времени откр_закр    BOOL    51-BIT 0    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_ALM_FN_KE2_1_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe2_1 превышение времени откр_закр    BOOL    51-BIT 1    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_ALM_FN_KE3_1_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe3_1 превышение времени откр_закр    BOOL    51-BIT 2    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_ALM_FN_KE4_1_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe4_1 превышение времени откр_закр    BOOL    51-BIT 3    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_ALM_FN_KE5_1_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe5_1 превышение времени откр_закр    BOOL    51-BIT 4    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_ALM_FN_KE1_2_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe1_2 превышение времени откр_закр    BOOL    51-BIT 5    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_ALM_FN_KE2_2_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe2_2 превышение времени откр_закр    BOOL    51-BIT 6    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_ALM_FN_KE3_2_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe3_2 превышение времени откр_закр    BOOL    51-BIT 7    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_ALM_FN_KE4_2_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe4_2 превышение времени откр_закр    BOOL    51-BIT 8    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_ALM_FN_KE5_2_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe5_2 превышение времени откр_закр    BOOL    51-BIT 9    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_ALM_FN_KE1_3_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe1_3 превышение времени откр_закр    BOOL    51-BIT 10   "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_ALM_FN_KE2_3_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe2_3 превышение времени откр_закр    BOOL    51-BIT 11   "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_ALM_FN_KE3_3_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe3_3 превышение времени откр_закр    BOOL    51-BIT 12   "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_ALM_FN_KE4_3_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe4_3 превышение времени откр_закр    BOOL    51-BIT 13   "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
-    LCU5_ALM_FN_KE5_3_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 3zpe5_3 превышение времени откр_закр    BOOL    51-BIT 14   "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_ALM_FN_KE1_1_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe1_1 превышение времени откр_закр    BOOL    51-BIT 0    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_ALM_FN_KE2_1_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe2_1 превышение времени откр_закр    BOOL    51-BIT 1    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_ALM_FN_KE3_1_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe3_1 превышение времени откр_закр    BOOL    51-BIT 2    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_ALM_FN_KE4_1_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe4_1 превышение времени откр_закр    BOOL    51-BIT 3    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_ALM_FN_KE5_1_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe5_1 превышение времени откр_закр    BOOL    51-BIT 4    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_ALM_FN_KE1_2_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe1_2 превышение времени откр_закр    BOOL    51-BIT 5    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_ALM_FN_KE2_2_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe2_2 превышение времени откр_закр    BOOL    51-BIT 6    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_ALM_FN_KE3_2_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe3_2 превышение времени откр_закр    BOOL    51-BIT 7    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_ALM_FN_KE4_2_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe4_2 превышение времени откр_закр    BOOL    51-BIT 8    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_ALM_FN_KE5_2_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe5_2 превышение времени откр_закр    BOOL    51-BIT 9    "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_ALM_FN_KE1_3_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe1_3 превышение времени откр_закр    BOOL    51-BIT 10   "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_ALM_FN_KE2_3_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe2_3 превышение времени откр_закр    BOOL    51-BIT 11   "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_ALM_FN_KE3_3_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe3_3 превышение времени откр_закр    BOOL    51-BIT 12   "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_ALM_FN_KE4_3_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe4_3 превышение времени откр_закр    BOOL    51-BIT 13   "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
+    LCU5_ALM_FN_KE5_3_Internal  : FB_DI;    //  Кран шаровый с эл. Приводом 4zpe5_3 превышение времени откр_закр    BOOL    51-BIT 14   "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
     LCU5_FN_4P10_ALM            : FB_DI;    //  Минимальное давление на напорном трубопроводе обводной линии        BOOL    51-BIT 15   "0 - нет сигнала, 1 - есть сигнал"  R   input register  0x04
     
     LCU5_IND_MODE                       : WORD; //  Режим работы ШУ5    WORD    52  0 - Ждущий режим, 1 - Авт. Режим, 2 - Руч. Режим                    R   input register  0x04
