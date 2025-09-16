@@ -1,9 +1,9 @@
 import re
 import pandas as pd
 
-def signals_matches(path: str, equipment_type: str, signal_type: str) -> tuple:
+def signals_matches(read_path: str, equipment_type: str, signal_type: str) -> tuple:
     result = ''
-    with open(path, 'r', encoding='utf-8') as file:
+    with open(read_path, 'r', encoding='utf-8') as file:
         var_declarations_string = file.read()               # Чтение файла с объявлениями переменных
     declarations = var_declarations_string.split('\n')      # Разделение файла по строкам в массив declarations
     sr = declarations[0].split(sep=' ')[1]                  # Выделение названия sr-ки для добавления в название целевых файлов
@@ -81,7 +81,7 @@ def write_str_to_file(data: str, path: str) -> None:
         for i in data:
             f.write(i)
 
-def write_signal_to_excel(data: str, path: str, equipment_type: str, signal_type: str):
+def write_signal_to_excel(data: str, write_path: str, equipment_type: str, signal_type: str):
     if signal_type == 'di':
         ids: list = []
         systems: list = []
@@ -124,7 +124,7 @@ def write_signal_to_excel(data: str, path: str, equipment_type: str, signal_type
             {'id': ids, 'system': systems, 'equipment': equipments, 'name': names, 'place': '', 'product': '',
              'module': '', 'channel': '', 'crate': '', 'check': '', 'cat': '', 'property': '', 'fb': fbs,
              'inversion': '', 'ton': '', 'tof': '', 'comment': comments, 'modbus': '', 'node': ''})
-        df.to_excel(path)
+        df.to_excel(write_path)
     elif signal_type == 'do':
         ids: list = []
         systems: list = []
@@ -167,7 +167,7 @@ def write_signal_to_excel(data: str, path: str, equipment_type: str, signal_type
             {'id': ids, 'equipment': equipments, 'system': systems, 'name': names, 'place': '', 'product': '',
              'module': '', 'channel': '', 'crate': '', 'check': '', 'inversion': '', 'property': '', 'fb': fbs,
              'comment': comments, 'modbus': '', 'node': ''})
-        df.to_excel(path)
+        df.to_excel(write_path)
 
 signals_valve_di = signals_matches('Files/var_declarations', 'valve', 'di')
 write_signal_to_excel(signals_valve_di[0], 'Files/valve_di_' + signals_valve_di[1] + '.xlsx', 'valve', 'di')
