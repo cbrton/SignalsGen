@@ -74,6 +74,20 @@ def signals_matches(read_path: str, equipment_type: str, signal_type: str) -> tu
                     if signal_desc == 'OFF':
                         pump_setStart_signal = object_name + '_pump_setStart' + '\t' + sr + '.' + var_name + '\n'
                         result += pump_setStart_signal
+    elif equipment_type == 'ai':
+        for declaration in declarations:
+            object_name_list = re.search(r'[A-Z]T_\d{1,2}[A-Z]\d{1,2}', declaration)
+            object_name: str = ''
+            var_name: str = ''
+            signal_desc: str = ''
+            if object_name_list:
+                object_name = object_name_list[0]
+                splitted_declaration = declaration.split(sep=':')
+                var_name = re.sub(r'\s', '', splitted_declaration[0])
+                splitted_var_name = var_name.split(sep='_')
+                signal_desc = splitted_var_name[len(splitted_var_name) - 1]
+                ai_signal = object_name + '\t' + sr + '.' + var_name + '\n'
+                result += ai_signal
     return (result, sr)
 
 def write_str_to_file(data: str, path: str) -> None:
@@ -168,6 +182,35 @@ def write_signal_to_excel(data: str, write_path: str, equipment_type: str, signa
              'module': '', 'channel': '', 'crate': '', 'check': '', 'inversion': '', 'property': '', 'fb': fbs,
              'comment': comments, 'modbus': '', 'node': ''})
         df.to_excel(write_path)
+    elif signal_type == 'ai':
+        ids: list = []
+        systems: list = []
+        equipments: list = []
+        names: list = []
+        fbs: list = []
+        comments: list = []
+        rows = data.split(sep='\n')
+
+        for row in rows:
+            splitted_row = row.split(sep='\t')
+            if splitted_row[0]:
+                id = splitted_row[0]
+                ids.append(id)
+                systems.append('RSU_12')
+                fbs.append('FB_AI')
+                splitted_id = id.split(sep='_')
+                equipment: str = splitted_id[0] + '-' + splitted_id[1]
+                equipments.append(equipment)
+                name: str = splitted_id[0] + '-' + splitted_id[1]
+                names.append(name)
+                comment = splitted_row[1]
+                comments.append(comment)
+
+        df = pd.DataFrame(
+            {'id': ids, 'system': systems, 'equipment': equipments, 'name': names, 'unit': '', 'place': '', 'product': '',
+             'module': '', 'channel': '', 'crate': '', 'check': '', 'fb': fbs, 'property': '', 'comment': comments,
+             'modbus': '', 'adr': '', 'sign': '', 'YMIN': '', 'YMAX': '', 'AH': '', 'WH': '', 'WL': '', 'AL': '', '2': '', 'node': '', 'filter': ''})
+        df.to_excel(write_path)
 
 signals_valve_di = signals_matches('Files/var_declarations', 'valve', 'di')
 write_signal_to_excel(signals_valve_di[0], 'Files/valve_di_' + signals_valve_di[1] + '.xlsx', 'valve', 'di')
@@ -180,3 +223,6 @@ write_signal_to_excel(signals_mtr_di[0], 'Files/mtr_di_' + signals_mtr_di[1] + '
 
 signals_mtr_do = signals_matches('Files/var_declarations', 'mtr', 'do')
 write_signal_to_excel(signals_mtr_do[0], 'Files/mtr_do_' + signals_mtr_do[1] + '.xlsx', 'mtr', 'do')
+
+signals_ai = signals_matches('Files/var_declarations', 'ai', 'ai')
+write_signal_to_excel(signals_ai[0], 'Files/ai_' + signals_ai[1] + '.xlsx', 'ai', 'ai')

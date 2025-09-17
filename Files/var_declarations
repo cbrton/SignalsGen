@@ -407,6 +407,13 @@ VAR
     PROC_SIGNAL_BP7_N4_2_PRODUCTIVITY   : REAL; // Величина изм. Производительности насоса Н4_2 REAL    151  -  R   input register  0x04
     VALUE_3F6_PULSE_TOTAL_FLOW          : REAL; // Накопленный расход по изм. датчика 3F6   REAL    153  -  R   input register  0x04
     VALUE_4F4_PULSE_TOTAL_FLOW          : REAL; // Накопленный расход по изм. датчика 4F4   REAL    155  -  R   input register  0x04
+
+    LT_3L1                              : FB_AI; // Аналоговый датчик LT_3L1
+    LT_3L2                              : FB_AI; // Аналоговый датчик LT_3L2
+    LT_4L2                              : FB_AI; // Аналоговый датчик LT_4L2
+    FT_3F6                              : FB_AI; // Аналоговый датчик FT_3F6
+    FT_4F4                              : FB_AI; // Аналоговый датчик FT_4F4
+    
     LCU4_KE6_IND                        : WORD; // Состояние - Арматура с электроприводом 4кшэ6     WORD    157 0 - закр, 1 - откр  R   input register  0x04
     BP7_N4_1_IND                        : WORD; // Состояние - Насос Н4_1   WORD    158 0 - откл, 1 - вкл, 2 - авария, 3 - ожидание разгона R   input register  0x04
     BP7_N4_2_IND                        : WORD; // Состояние - Насос Н4_2   WORD    159 0 - откл, 1 - вкл, 2 - авария, 3 - ожидание разгона R   input register  0x04
