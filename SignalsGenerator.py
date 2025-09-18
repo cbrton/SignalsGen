@@ -234,25 +234,25 @@ def write_signal_to_excel(data: str, write_path: str, equipment_type: str, signa
                 comment = splitted_row[1]
                 comments.append(comment)
                 ymin: str = splitted_row[2]
-                if ymin != '':
+                if ymin != sr + '.':
                     ymins.append(ymin)
                 else:
-                    ymins.append('none')
+                    ymins.append('-')
                 ymax: str = splitted_row[3]
-                if ymax != '':
+                if ymax != sr + '.':
                     ymaxs.append(ymax)
                 else:
-                    ymaxs.append('none')
+                    ymaxs.append('-')
                 ah: str = splitted_row[4]
-                if ah != '':
+                if ah != sr + '.':
                     ahs.append(ah)
                 else:
-                    ahs.append('none')
+                    ahs.append('-')
                 al: str = splitted_row[5]
-                if al != '':
+                if al != sr + '.':
                     als.append(al)
                 else:
-                    als.append('none')
+                    als.append('-')
 
 
 
