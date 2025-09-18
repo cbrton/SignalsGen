@@ -1,12 +1,14 @@
 import re
 import pandas as pd
 
-def signals_matches(read_path: str, equipment_type: str, signal_type: str) -> tuple:
+read_path = 'Files/var_declarations'
+with open(read_path, 'r', encoding='utf-8') as file:
+    var_declarations_string = file.read()  # Чтение файла с объявлениями переменных
+declarations = var_declarations_string.split('\n')  # Разделение файла по строкам в массив declarations
+sr = declarations[0].split(sep=' ')[1]  # Выделение названия sr-ки для добавления в название целевых файлов
+
+def signals_matches(equipment_type: str, signal_type: str) -> tuple:
     result = ''
-    with open(read_path, 'r', encoding='utf-8') as file:
-        var_declarations_string = file.read()               # Чтение файла с объявлениями переменных
-    declarations = var_declarations_string.split('\n')      # Разделение файла по строкам в массив declarations
-    sr = declarations[0].split(sep=' ')[1]                  # Выделение названия sr-ки для добавления в название целевых файлов
 
     if equipment_type == 'valve':
         for declaration in declarations:
@@ -76,17 +78,39 @@ def signals_matches(read_path: str, equipment_type: str, signal_type: str) -> tu
                         result += pump_setStart_signal
     elif equipment_type == 'ai':
         for declaration in declarations:
-            object_name_list = re.search(r'[A-Z]T_\d{1,2}[A-Z]\d{1,2}', declaration)
+            object_name_list = re.search(r'[L|P|T|Q|F]T_\d{1,2}[L|P|T|Q|F]\d{1,2}', declaration)
             object_name: str = ''
             var_name: str = ''
             signal_desc: str = ''
             if object_name_list:
                 object_name = object_name_list[0]
+                splitted_object_name = object_name.split(sep='_')
+                sensor_position = splitted_object_name[1]
+                ymin_var: str = ''
+                ymax_var: str = ''
+                ah_var: str = ''
+                al_var: str = ''
+                for row in declarations:
+                    sensor_name_list = re.search(sensor_position, row)
+                    if sensor_name_list:
+                        splitted_row = row.split(sep=':')
+                        sensor_var_name = re.sub(r'\s', '', splitted_row[0])
+                        splitted_sensor_var_name = sensor_var_name.split(sep='_')
+                        config_var = splitted_sensor_var_name[len(splitted_sensor_var_name) - 2] + '_' + splitted_sensor_var_name[len(splitted_sensor_var_name) - 1]
+                        if config_var == 'Lo_limit':
+                            ymin_var = sensor_var_name
+                        elif config_var == 'Hi_limit':
+                            ymax_var = sensor_var_name
+                        elif config_var == 'SET_MAX':
+                            ah_var = sensor_var_name
+                        elif config_var == 'SET_MIN':
+                            al_var = sensor_var_name
                 splitted_declaration = declaration.split(sep=':')
                 var_name = re.sub(r'\s', '', splitted_declaration[0])
                 splitted_var_name = var_name.split(sep='_')
                 signal_desc = splitted_var_name[len(splitted_var_name) - 1]
-                ai_signal = object_name + '\t' + sr + '.' + var_name + '\n'
+                ai_signal = object_name + '\t' + sr + '.' + var_name + '\t' + sr + '.' + ymin_var + '\t' + sr + '.' + ymax_var + '\t' + sr + '.' + ah_var + '\t' + sr + '.' + al_var + '\n'
+                print(ai_signal)
                 result += ai_signal
     return (result, sr)
 
@@ -190,6 +214,10 @@ def write_signal_to_excel(data: str, write_path: str, equipment_type: str, signa
         fbs: list = []
         comments: list = []
         rows = data.split(sep='\n')
+        ymins: list = []
+        ymaxs: list = []
+        ahs: list = []
+        als: list = []
 
         for row in rows:
             splitted_row = row.split(sep='\t')
@@ -205,24 +233,46 @@ def write_signal_to_excel(data: str, write_path: str, equipment_type: str, signa
                 names.append(name)
                 comment = splitted_row[1]
                 comments.append(comment)
+                ymin: str = splitted_row[2]
+                if ymin != '':
+                    ymins.append(ymin)
+                else:
+                    ymins.append('none')
+                ymax: str = splitted_row[3]
+                if ymax != '':
+                    ymaxs.append(ymax)
+                else:
+                    ymaxs.append('none')
+                ah: str = splitted_row[4]
+                if ah != '':
+                    ahs.append(ah)
+                else:
+                    ahs.append('none')
+                al: str = splitted_row[5]
+                if al != '':
+                    als.append(al)
+                else:
+                    als.append('none')
+
+
 
         df = pd.DataFrame(
             {'id': ids, 'system': systems, 'equipment': equipments, 'name': names, 'unit': '', 'place': '', 'product': '',
              'module': '', 'channel': '', 'crate': '', 'check': '', 'fb': fbs, 'property': '', 'comment': comments,
-             'modbus': '', 'adr': '', 'sign': '', 'YMIN': '', 'YMAX': '', 'AH': '', 'WH': '', 'WL': '', 'AL': '', '2': '', 'node': '', 'filter': ''})
+             'modbus': '', 'adr': '', 'sign': '', 'YMIN': ymins, 'YMAX': ymaxs, 'AH': ahs, 'WH': '', 'WL': '', 'AL': als, '2': '', 'node': '', 'filter': ''})
         df.to_excel(write_path)
 
-signals_valve_di = signals_matches('Files/var_declarations', 'valve', 'di')
+signals_valve_di = signals_matches( 'valve', 'di')
 write_signal_to_excel(signals_valve_di[0], 'Files/valve_di_' + signals_valve_di[1] + '.xlsx', 'valve', 'di')
 
-signals_valve_do = signals_matches('Files/var_declarations', 'valve', 'do')
+signals_valve_do = signals_matches('valve', 'do')
 write_signal_to_excel(signals_valve_do[0], 'Files/valve_do_' + signals_valve_do[1] + '.xlsx', 'valve', 'do')
 
-signals_mtr_di = signals_matches('Files/var_declarations', 'mtr', 'di')
+signals_mtr_di = signals_matches('mtr', 'di')
 write_signal_to_excel(signals_mtr_di[0], 'Files/mtr_di_' + signals_mtr_di[1] + '.xlsx', 'mtr', 'di')
 
-signals_mtr_do = signals_matches('Files/var_declarations', 'mtr', 'do')
+signals_mtr_do = signals_matches('mtr', 'do')
 write_signal_to_excel(signals_mtr_do[0], 'Files/mtr_do_' + signals_mtr_do[1] + '.xlsx', 'mtr', 'do')
 
-signals_ai = signals_matches('Files/var_declarations', 'ai', 'ai')
+signals_ai = signals_matches('ai', 'ai')
 write_signal_to_excel(signals_ai[0], 'Files/ai_' + signals_ai[1] + '.xlsx', 'ai', 'ai')
